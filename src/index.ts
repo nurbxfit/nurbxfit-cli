@@ -1,8 +1,27 @@
 #!/usr/bin/env node
 
+import { Command } from "commander";
 import { say } from "./utils/say";
+import { createHonoSSR } from "./commands/create-hono-ssr";
 
-say.info("Starting project setup...");
-say.success("Project created successfully!");
-say.warn("Using fallback option...");
-say.error("Something went wrong!");
+const program = new Command();
+
+program.name("nurbxfit-cli")
+    .description("CLI tools by nurbxfit, for nubrxfit github")
+    .version("1.0.0")
+
+// simple starter project setup
+program
+    .command("create-hono-ssr <project-name>")
+    .description("Create a new Hono + React SSR project")
+    .action((projectName: string) => {
+        createHonoSSR(projectName);
+    });
+
+
+
+program.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+    program.outputHelp();
+}
