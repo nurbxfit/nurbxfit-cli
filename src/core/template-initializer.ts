@@ -1,4 +1,4 @@
-import { move, pathExists, remove } from "fs-extra";
+import { move, pathExists, readJson, remove, writeJson } from "fs-extra";
 import path from "path";
 import simpleGit, { SimpleGit } from "simple-git";
 
@@ -30,6 +30,7 @@ export class TemplateInitializer {
         const is_current_dir = target === process.cwd();
         const clone_target = is_current_dir ? path.join(target, ".temp-clone") : target;
 
+
         try {
             // 1. clone the repo
             this.logger.start("Cloning template repository...");
@@ -47,15 +48,29 @@ export class TemplateInitializer {
                 this.logger.succeed("Files moved");
                 await remove(clone_target);
             }
+            // 1.2 rename new project package.json into the given project name 
+            this.renameProject(clone_target)
 
             // 2. clean the cloned repo (remove .git)
-            await this.cleanGitDir(target);
+            // await this.cleanGitDir(clone_target);
 
             // 3. init fresh repo
-            await this.initGit(target, commit_message);
+            // await this.initGit(clone_target, commit_message);
 
         } catch (error) {
             throw new Error(`Repo setup failed: ${(error as Error).message}`);
+        }
+    }
+
+    private async renameProject(target_dir: string) {
+        const project_name = path.basename(target_dir);
+        const package_json_path = path.join(target_dir, "package.json");
+        if (await pathExists(package_json_path)) {
+            this.logger.start("Updating package.json...")
+            const package_json = await readJson(package_json_path);
+            package_json.name = project_name;
+            await writeJson(package_json_path, package_json, { spaces: 2 });
+            this.logger.succeed("package.json updated!");
         }
     }
 

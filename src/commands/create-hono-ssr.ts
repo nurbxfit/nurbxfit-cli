@@ -3,11 +3,18 @@ import { say } from "../utils/say";
 import { existsSync } from "fs";
 import ora from "ora";
 import { TemplateInitializer } from "../core/template-initializer";
+import { validateName } from "../utils/validator";
 
 export async function createHonoSSR(projectName: string) {
 
-    const target_dir = path.resolve(process.cwd(), projectName);
+    // check if given is valid project name
+    const isValidName = validateName(projectName);
+    if (!isValidName.valid) {
+        say.error(`Invalid project name: ${isValidName.errors.join(', ')}`);
+        process.exit(1);
+    }
 
+    const target_dir = path.resolve(process.cwd(), projectName);
     const is_target_dir_exist = existsSync(target_dir);
 
     // if target dir exist and not empty
