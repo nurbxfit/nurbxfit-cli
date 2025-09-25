@@ -2,7 +2,6 @@
   "name": "nurbxfit-cli",
   "version": "1.0.0",
   "description": "A CLI tool for creating projects using starter template from nurbxfit github",
-  "type": "module",
   "bin": {
     "nurbxfit": "./bin/nurbxfit-cli.js"
   },

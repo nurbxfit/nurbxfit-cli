@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-import chalk from "chalk";
 
+import { say } from "./utils/say";
 
-console.log(chalk.blue('Hello World'))
-console.log(chalk.green('Hello World'))
+say.info("Starting project setup...");
+say.success("Project created successfully!");
+say.warn("Using fallback option...");
+say.error("Something went wrong!");
