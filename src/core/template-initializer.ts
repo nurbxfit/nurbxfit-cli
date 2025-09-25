@@ -52,10 +52,10 @@ export class TemplateInitializer {
             this.renameProject(clone_target)
 
             // 2. clean the cloned repo (remove .git)
-            // await this.cleanGitDir(clone_target);
+            await this.cleanGitDir(clone_target);
 
             // 3. init fresh repo
-            // await this.initGit(clone_target, commit_message);
+            await this.initGit(clone_target, commit_message);
 
         } catch (error) {
             throw new Error(`Repo setup failed: ${(error as Error).message}`);
