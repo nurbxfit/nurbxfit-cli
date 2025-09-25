@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { say } from "./utils/say";
 import { createHonoSSR } from "./commands/create-hono-ssr";
 
 const program = new Command();
@@ -12,7 +11,7 @@ program.name("nurbxfit-cli")
 
 // simple starter project setup
 program
-    .command("create-hono-ssr <project-name>")
+    .command("create-cf-hono-react-ssr <project-name>")
     .description("Create a new Hono + React SSR project")
     .action((projectName: string) => {
         createHonoSSR(projectName);

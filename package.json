@@ -9,7 +9,7 @@
     "build": "tsc",
     "dev": "concurrently \"tsc --watch\" \"nodemon -q bin/nurbxfit-cli.js\"",
     "start": "node dist/index.js",
-    "preview": "node bin/nurbxfit-cli.js",
+    "preview": "tsc && node bin/nurbxfit-cli.js",
     "clean": "rm -rf dist",
     "prepublishOnly": "pnpm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,6 +32,8 @@
   "dependencies": {
     "chalk": "^5.6.2",
     "commander": "^14.0.1",
-    "fs-extra": "^11.3.2"
+    "fs-extra": "^11.3.2",
+    "ora": "^9.0.0",
+    "simple-git": "^3.28.0"
   }
 }
