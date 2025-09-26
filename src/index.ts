@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import { createHonoSSR } from "./commands/create-hono-ssr";
+import { createFromTemplate } from "./commands/create-from-template";
 
 const program = new Command();
 
@@ -17,6 +18,12 @@ program
         createHonoSSR(projectName);
     });
 
+program.command("create <project-name>")
+    .description("Create a new project from a template")
+    .option("-t, --template <template>",
+        "Template name"
+    )
+    .action(createFromTemplate);
 
 
 program.parse(process.argv);

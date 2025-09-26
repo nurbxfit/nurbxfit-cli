@@ -46,6 +46,22 @@ This will:
 
 - `create-cf-hono-react-ssr <project-name>` — Creates a new Hono + React SSR project.
 
+### Example: Interactive Template Selection
+
+```sh
+$ nurbxfit create my-app
+? Choose a template
+❯ cf-hono-react-ssr   https://github.com/nurbxfit/cf-hono-react-ssr
+    cf-worker-auth-mcp  https://github.com/nurbxfit/cf-worker-anime-mcp
+    js-langraph-chat    https://github.com/nurbxfit/js-langgraph-chat
+```
+
+### Example: Direct Template Selection
+```sh
+nurbxfit create my-app -t cf-hono-react-ssr
+```
+👉 It skips the prompt and goes straight to project creation.
+
 *More templates coming soon!*
 
 ---
